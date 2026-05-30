@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DQN - Deep Q-Networks Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/lessons.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
+
+</head>
+<body>
+
+    <!-- Platform Header Navigation -->
+    <header>
+        <div class="logo" onclick="window.location.href='../index.html'" style="cursor:pointer">RL<span>Space</span></div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="classic-rl.html">Classic RL</a>
+            <a href="dqn.html" class="active">DQN</a>
+            <a href="policy-gradient.html">Next Module <i class="fas fa-arrow-right"></i></a>
+        </nav>
+    </header>
+
+    <!-- Master Layout Split Screen -->
+    <div class="lesson-container">
+        
+        <!-- Left Column: Conceptual Syllabus -->
+        <div class="content-pane">
+            <div class="lesson-header">
+                <h2>02. Deep Q-Networks (DQN)</h2>
+                <p style="color: var(--text-muted)">Scaling RL to infinite state spaces using Deep Learning.</p>
+            </div>
+
+            <div class="theory-block">
+                <p>In classic RL, a Q-table works perfectly for small grids. But what happens when your input is a high-resolution camera frame? The state space becomes infinite, making a lookup table impossible to store in memory.</p>
+                
+                <p><strong>DQN solves this</strong> by replacing the Q-table with a <strong>Neural Network</strong>. Instead of looking up an index, we pass the state (S) as an input vector into a neural network, which outputs the estimated Q-values for all possible actions simultaneously.</p>
+                
+                <p>To stabilize training and prevent the network from forgetting past experiences, DQN introduces two critical breakthroughs:</p>
+                
+                <div class="formula-box">
+                    <strong>1. Experience Replay:</strong> Stores transitions (s, a, r, s') in a circular buffer and samples random mini-batches to break temporal correlations.
+                </div>
+
+                <div class="formula-box">
+                    <strong>2. Target Network:</strong> Copies weights periodically to a separate frozen network to keep optimization targets \([R + \gamma \max Q_{target}(s', a')]\) stable.
+                </div>
+            </div>
+            
+            <button class="btn" onclick="window.location.href='policy-gradient.html'">Complete & Go to Policy Gradients</button>
+        </div>
+
+        <!-- Right Column: Visual Core Workspace (Architecture & Weights Dashboard) -->
+        <div class="interactive-pane">
+            <h3 style="margin-bottom:15px; font-size:18px; color:var(--text-main)">Neural Network Structure & Replay Analyzer</h3>
+            
+            <!-- Target Canvas Area for Neural Net Architecture View -->
+            <canvas id="simulation-canvas" width="400" height="350"></canvas>
+            
+            <!-- Live Buffer Metrics Dashboard -->
+            <div class="controls-row">
+                <div class="stat-box">Buffer Size <span id="ui-buffer">0 / 10,000</span></div>
+                <div class="stat-box">Loss Metric <span id="ui-loss">0.0000</span></div>
+                <div class="stat-box">Target Sync <span id="ui-sync">Pending</span></div>
+            </div>
+
+            <!-- Interactivity Simulator Hooks -->
+            <div class="controls-row">
+                <button class="btn" id="btn-sample-batch"><i class="fas fa-database"></i> Sample Replay Batch</button>
+                <button class="btn" id="btn-sync-target" style="border-color:var(--accent-blue);"><i class="fas fa-sync-alt"></i> Force Target Sync</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/lessons.js"></script>
+    <!-- Initialize Auto-Render Trigger -->
+
+
+</body>
+</html>

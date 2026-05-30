@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy Gradients Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/lessons.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
+   
+
+</head>
+<body>
+
+    <!-- Platform Header Navigation -->
+    <header>
+        <div class="logo" onclick="window.location.href='../index.html'" style="cursor:pointer">RL<span>Space</span></div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="dqn.html">DQN</a>
+            <a href="policy-gradient.html" class="active">Policy Gradients</a>
+            <a href="ppo.html">Next Module <i class="fas fa-arrow-right"></i></a>
+        </nav>
+    </header>
+
+    <!-- Master Split Screen Layout -->
+    <div class="lesson-container">
+        
+        <!-- Left Column: Conceptual Syllabus -->
+        <div class="content-pane">
+            <div class="lesson-header">
+                <h2>03. Policy Gradients</h2>
+                <p style="color: var(--text-muted)">Optimizing actions directly by shifting probability distributions.</p>
+            </div>
+
+            <div class="theory-block">
+                <p>Unlike DQN, which estimates how "good" a state-action pair is, <strong>Policy Gradient methods</strong> model the policy function \(\pi_\theta(a|s)\) directly. The neural network inputs a state and directly outputs a probability distribution over possible actions.</p>
+                
+                <p>The core objective is to adjust network weights \(\theta\) to increase the probability of actions that lead to good outcomes, and decrease the probability of actions that lead to poor outcomes.</p>
+                
+                <p>The standard baseline architecture is the <strong>REINFORCE algorithm</strong>, driven by the Policy Gradient Theorem objective function:</p>
+                
+                <div class="formula-box">
+                    ∇θ J(θ) = E [ ∇θ log πθ(a|s) * G_t ]
+                </div>
+
+                <p><strong>Parameter Glossary:</strong></p>
+                <ul>
+                    <li><strong>\(\pi_\theta(a|s)\):</strong> Policy network outputting the probability of action \(a\) given state \(s\).</li>
+                    <li><strong>\(G_t\):</strong> The total discounted return from time step \(t\) until the end of the episode.</li>
+                    <li><strong>Log Derivative trick:</strong> Converts the complex derivative of an expectation into an easily computable sample gradient.</li>
+                </ul>
+            </div>
+            
+            <button class="btn" onclick="window.location.href='ppo.html'">Complete & Go to PPO</button>
+        </div>
+
+        <!-- Right Column: Visual Core Workspace (Probability Distributions Visualization) -->
+        <div class="interactive-pane">
+            <h3 style="margin-bottom:15px; font-size:18px; color:var(--text-main)">Action Probability Tracker</h3>
+            
+            <!-- Target Canvas Area for Probability Distribution View -->
+            <canvas id="simulation-canvas" width="400" height="350"></canvas>
+            
+            <!-- Live Policy Metrics Dashboard -->
+            <div class="controls-row">
+                <div class="stat-box">Action Softmax <span id="ui-softmax">[0.25, 0.25, 0.25, 0.25]</span></div>
+                <div class="stat-box">Log Probability <span id="ui-logprob">-1.386</span></div>
+                <div class="stat-box">Return (G_t) <span id="ui-return">0.00</span></div>
+            </div>
+
+            <!-- Interactivity Simulator Hooks -->
+            <div class="controls-row">
+                <button class="btn" id="btn-sample-action"><i class="fas fa-dice"></i> Sample Policy Action</button>
+                <button class="btn" id="btn-update-policy" style="border-color:var(--accent-blue);"><i class="fas fa-angle-double-up"></i> Compute Policy Gradient</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/lessons.js"></script>
+    <!-- Initialize Auto-Render Trigger -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Clean up LaTeX markup text strings instantly across the Policy Gradient view
+        const theoryContainer = document.querySelector('.content-pane');
+        if (theoryContainer) {
+            let html = theoryContainer.innerHTML;
+            
+            // Replaces structural formatting tags with clean unicode math text symbols
+            html = html.replaceAll('\\(\\pi_\\theta(a|s)\\)', 'π_θ(a|s)');
+            html = html.replaceAll('\\(\\theta\\)', 'θ');
+            html = html.replaceAll('\\(a\\)', 'a');
+            html = html.replaceAll('\\(s\\)', 's');
+            html = html.replaceAll('\\(G_t\\)', 'G_t');
+            html = html.replaceAll('\\(t\\)', 't');
+            
+            theoryContainer.innerHTML = html;
+        }
+    });
+</script>
+
+
+</body>
+</html>

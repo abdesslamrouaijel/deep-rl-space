@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPO Optimization Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/lessons.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
+
+
+</head>
+<body>
+
+    <!-- Platform Header Navigation -->
+    <header>
+        <div class="logo" onclick="window.location.href='../index.html'" style="cursor:pointer">RL<span>Space</span></div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="policy-gradient.html">Policy Gradients</a>
+            <a href="ppo.html" class="active">PPO Optimization</a>
+            <a href="../index.html" class="btn">Return to Hub</a>
+        </nav>
+    </header>
+
+    <!-- Master Split Screen Layout -->
+    <div class="lesson-container">
+        
+        <!-- Left Column: Conceptual Syllabus -->
+        <div class="content-pane">
+            <div class="lesson-header">
+                <h2>04. Proximal Policy Optimization (PPO)</h2>
+                <p style="color: var(--text-muted)">State-of-the-art policy safety margins via bounded updates.</p>
+            </div>
+
+            <div class="theory-block">
+                <p>Standard Policy Gradient methods can occasionally collapse during training. If a parameter update shifts network probabilities too drastically, the agent can fall into an unrecoverable state of terrible choices, completely ruining performance.</p>
+                
+                <p><strong>PPO introduces a massive upgrade</strong>: a clipped surrogate objective function. It tracks a probability ratio \(r_t(\theta)\) between the new policy and the old policy, forcing updates to stay inside a tight safety window (typically between \(0.8\) and \(1.2\)).</p>
+                
+                <div class="formula-box">
+                    L^CLIP(θ) = E [ min( r_t(θ) * A_t, clip(r_t(θ), 1-ε, 1+ε) * A_t ) ]
+                </div>
+
+                <p><strong>Parameter Glossary:</strong></p>
+                <ul>
+                    <li><strong>\(r_t(\theta)\):</strong> Probability Ratio. Measures how much more likely an action is under the new policy vs old policy.</li>
+                    <li><strong>\(A_t\):</strong> Advantage function. Tracks if an action performed better or worse than the baseline average.</li>
+                    <li><strong>\(\epsilon\) (Clip bound):</strong> Hyperparameter (usually 0.2) preventing large destructive update spikes.</li>
+                </ul>
+            </div>
+            
+            <button class="btn" onclick="alert('Congratulations! You have completed all theoretical modules. Proceeding to playground configuration initialization.')">Complete Full Syllabus</button>
+        </div>
+
+        <!-- Right Column: Visual Core Workspace (Clipping Bounds Tracker) -->
+        <div class="interactive-pane">
+            <h3 style="margin-bottom:15px; font-size:18px; color:var(--text-main)">Clipped Objective Safety Analyzer</h3>
+            
+            <!-- Target Canvas Area for PPO Ratio Bounds Visualization -->
+            <canvas id="simulation-canvas" width="400" height="350"></canvas>
+            
+            <!-- Live PPO Tracker Dashboard -->
+            <div class="controls-row">
+                <div class="stat-box">Policy Ratio (r_t) <span id="ui-ratio">1.000</span></div>
+                <div class="stat-box">Advantage (A_t) <span id="ui-advantage">0.000</span></div>
+                <div class="stat-box">Objective State <span id="ui-status" style="color: #4aff4a;">Stable</span></div>
+            </div>
+
+            <!-- Interactivity Simulator Hooks -->
+            <div class="controls-row">
+                <button class="btn" id="btn-increase-step"><i class="fas fa-angle-up"></i> Simulate Large Step</button>
+                <button class="btn" id="btn-clip-check" style="border-color:var(--accent-blue);"><i class="fas fa-compress-alt"></i> Execute Clip Guard</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/lessons.js"></script>
+    <!-- Initialize Auto-Render Trigger -->
+     
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Clean up LaTeX markup text strings instantly across the PPO view
+        const theoryContainer = document.querySelector('.content-pane');
+        if (theoryContainer) {
+            let html = theoryContainer.innerHTML;
+            
+            // Replaces structural formatting tags with clean unicode math text symbols
+            html = html.replaceAll('\\(r_t(\\theta)\\)', 'r_t(θ)');
+            html = html.replaceAll('\\(0.8\\)', '0.8');
+            html = html.replaceAll('\\(1.2\\)', '1.2');
+            html = html.replaceAll('\\(A_t\\)', 'A_t');
+            html = html.replaceAll('\\(\\epsilon\\)', 'ε');
+            
+            theoryContainer.innerHTML = html;
+        }
+    });
+</script>
+
+
+</body>
+</html>

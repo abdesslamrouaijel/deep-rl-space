@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic RL - Q-Learning Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/lessons.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
+
+</head>
+<body>
+
+    <!-- Platform Header Navigation -->
+    <header>
+        <div class="logo" onclick="window.location.href='../index.html'" style="cursor:pointer">RL<span>Space</span></div>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="classic-rl.html" class="active">Classic RL</a>
+            <a href="dqn.html">Next Module <i class="fas fa-arrow-right"></i></a>
+        </nav>
+    </header>
+
+    <!-- Master Layout Layout -->
+    <div class="lesson-container">
+        
+        <!-- Left Column: Conceptual Syllabus -->
+        <div class="content-pane">
+            <div class="lesson-header">
+                <h2>01. Tabular Q-Learning</h2>
+                <p style="color: var(--text-muted)">The foundation of environment action-reward loops.</p>
+            </div>
+
+            <div class="theory-block">
+                <p>Reinforcement Learning relies heavily on a mathematical frame called a <strong>Markov Decision Process (MDP)</strong>. An agent interacts with an environment by viewing its current <strong>State (S)</strong>, making an <strong>Action (A)</strong>, and receiving a corresponding <strong>Reward (R)</strong> along with a new updated state.</p>
+                
+                <p>In tabular Q-Learning, we track knowledge via a lookup framework matrix called a <strong>Q-Table</strong>. The system records updates by calculating errors via the classic Bellman Equation formulation:</p>
+                
+                <div class="formula-box">
+                    Q(s, a) = Q(s, a) + α * [R + γ * max(Q(s', a')) - Q(s, a)]
+                </div>
+
+                <p><strong>Parameter Glossary:</strong></p>
+                <ul>
+                    <li><strong>α (Alpha):</strong> Learning rate. Controls tracking responsiveness.</li>
+                    <li><strong>γ (Gamma):</strong> Discount factor. Values long-term returns vs immediate payoffs.</li>
+                    <li><strong>Exploration (ε-greedy):</strong> Promotes discovery of alternate, unmapped paths over pure exploitation.</li>
+                </ul>
+            </div>
+            
+            <button class="btn" onclick="window.location.href='dqn.html'">Complete & Go to DQN</button>
+        </div>
+
+        <!-- Right Column: Interactive Sim Core Workspace -->
+        <div class="interactive-pane">
+            <h3 style="margin-bottom:15px; font-size:18px; color:var(--text-main)">Interactive Gridworld Environment</h3>
+            
+            <!-- Live Canvas Frame Render Target -->
+            <canvas id="simulation-canvas" width="400" height="400"></canvas>
+            
+            <!-- Live Agent Evaluation Metrics Dashboard -->
+            <div class="controls-row">
+                <div class="stat-box">Episode <span id="ui-episode">0</span></div>
+                <div class="stat-box">Current Reward <span id="ui-reward">0</span></div>
+                <div class="stat-box">Exploration Rate <span id="ui-epsilon">1.00</span></div>
+            </div>
+
+            <!-- Dashboard Control Interfaces -->
+            <div class="controls-row">
+                <button class="btn" id="btn-toggle-sim"><i class="fas fa-play"></i> Run Training Step</button>
+                <button class="btn" id="btn-reset-sim" style="border-color:#ff4a4a; color:#ff4a4a"><i class="fas fa-redo"></i> Reset Grid</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script Assets Mapping -->
+    <script src="../js/lessons.js"></script>
+    <script src="../js/game/environment.js"></script>
+    <script src="../js/game/agent.js"></script>
+    <script src="../js/game/engine.js"></script>
+    <script src="../js/lessons.js"></script>
+    <!-- Initialize Auto-Render Trigger -->
+
+
+</body>
+</html>

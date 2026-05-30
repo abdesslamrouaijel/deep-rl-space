@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RL Space - Educational Platform</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- FontAwesome used for matching the image icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header>
+        <div class="logo">Abdesslam<span>Rouaijel</span></div>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="lessons/classic-rl.html">Course Outline</a>
+            <a href="lessons/assessment.html" class="btn">Test Your Knowledge</a>
+        </nav>
+    </header>
+
+    <!-- Welcome Hero Area -->
+    <section class="hero">
+        <h1>Learning <span> Deep Reinforcement Learning</span></h1>
+        <p>A structured guide to deep reinforcement learning algorithms.</p>
+    </section>
+
+    <!-- Learning Modules Grid -->
+    <main class="grid-container">
+        
+        <!-- Module 0: Classic RL -->
+        <div class="card" onclick="window.location.href='lessons/classic-rl.html'">
+            <div class="card-icon"><i class="fas fa-table"></i></div>
+            <h3>01. Classic RL</h3>
+            <p>Explore foundations: MDPs, States, Actions, and the standard Tabular Q-Learning loop.</p>
+            <a href="lessons/classic-rl.html" class="btn">Start Foundation</a>
+        </div>
+
+        <!-- Module 1: DQN -->
+        <div class="card" onclick="window.location.href='lessons/dqn.html'">
+            <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+            <h3>02. Deep Q-Networks</h3>
+            <p>Replace tables with neural networks. Master value function approximation and replay buffers.</p>
+            <a href="lessons/dqn.html" class="btn">Learn DQN</a>
+        </div>
+
+        <!-- Module 2: Policy Gradient -->
+        <div class="card" onclick="window.location.href='lessons/policy-gradient.html'">
+            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>03. Policy Gradients</h3>
+            <p>Optimize actions directly instead of estimating values. Learn REINFORCE mechanics.</p>
+            <a href="lessons/policy-gradient.html" class="btn">Learn PG</a>
+        </div>
+
+        <!-- Module 3: PPO -->
+        <div class="card" onclick="window.location.href='lessons/ppo.html'">
+            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>04. PPO Optimization</h3>
+            <p>Discover stable clipping functions. Implement state-of-the-art policy architectures.</p>
+            <a href="lessons/ppo.html" class="btn">Learn PPO</a>
+        </div>
+
+    </main>
+
+</body>
+</html>
